@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>部屋の動線メモ</title>
+  <meta name="description" content="部屋の片付けと動線（人が移動する道筋）を改善するためのアプリ">
+  <!-- iPhone・iPad でホーム画面に追加したときの設定 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="動線メモ">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#2f6f6a">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 上部バー -->
+  <header class="topbar">
+    <div class="brand">部屋の動線メモ</div>
+    <div class="toolbar">
+      <button type="button" data-act="new">新規</button>
+      <button type="button" data-act="sample">見本を読み込む</button>
+      <button type="button" data-act="export">JSON 書き出し</button>
+      <button type="button" data-act="import-json">JSON 読み込み</button>
+      <label class="switch" title="机の前に「椅子を引いて座る範囲」を障害物として加えます">
+        <input type="checkbox" id="workMode"> 作業中モード
+      </label>
+    </div>
+    <div class="score" id="score">1日の移動距離 —</div>
+  </header>
+
+  <main class="layout">
+    <!-- 間取り図 -->
+    <section class="plan-area">
+      <div class="preview-bar" id="previewBar" hidden>
+        <span id="previewText">提案をプレビュー中</span>
+        <button type="button" class="primary" data-act="adopt">採用</button>
+        <button type="button" data-act="revert">戻す</button>
+      </div>
+      <div class="tool-bar" id="toolBar" hidden>
+        <span id="toolText"></span>
+        <button type="button" data-act="tool-off">終わる</button>
+      </div>
+      <svg id="plan" xmlns="http://www.w3.org/2000/svg" aria-label="間取り図"></svg>
+      <div class="legend">
+        <span><i class="sw green"></i>通路幅 90cm 以上</span>
+        <span><i class="sw yellow"></i>60〜90cm</span>
+        <span><i class="sw red"></i>60cm 未満</span>
+        <span><i class="sw dash"></i>地点とつなぐ線</span>
+      </div>
+    </section>
+
+    <!-- 右側（スマホでは下側）のタブ -->
+    <section class="side">
+      <nav class="tabs" id="tabs">
+        <button type="button" data-tab="import">取り込み</button>
+        <button type="button" data-tab="layout">間取り</button>
+        <button type="button" data-tab="fixtures">設備</button>
+        <button type="button" data-tab="stops">地点・動き</button>
+        <button type="button" data-tab="things">物</button>
+        <button type="button" data-tab="result">結果</button>
+        <button type="button" data-tab="suggest">提案</button>
+      </nav>
+      <div class="panel" id="panel"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="modal" id="modal" hidden></div>
+
+  <!-- ファイル選択（画面には出さない） -->
+  <input type="file" id="fileJson" accept="application/json,.json" hidden>
+  <input type="file" id="fileImage" accept="image/*" hidden>
+  <input type="file" id="fileCamera" accept="image/*" capture="environment" hidden>
+
+  <!-- ES モジュールは使わず、通常の script で順に読み込む -->
+  <script src="sample-data.js"></script>
+  <script src="logic.js"></script>
+  <script src="import.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
