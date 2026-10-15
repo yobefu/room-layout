@@ -1,0 +1,4 @@
+{
+  "//": "node --test room-layout/test/ で logic.test.js を実行するための入口の指定",
+  "main": "logic.test.js"
+}
