@@ -18,10 +18,10 @@ iPhone・iPad では HTML ファイルを直接開いても動かないため、
    - Git を使う場合は、このフォルダで次のコマンドを実行する（`<ユーザー名>` と `<リポジトリ名>` は自分のものに置き換える）。
      ```
      git remote add origin https://github.com/<ユーザー名>/<リポジトリ名>.git
-     git push -u origin master
+     git push -u origin main
      ```
    - Git を使わない場合は、GitHub の画面の「Add file → Upload files」からファイルをまとめてアップロードする。
-3. リポジトリの「Settings → Pages」で、Branch に `master`（フォルダは `/ (root)`）を選んで Save。
+3. リポジトリの「Settings → Pages」で、Branch に `main`（フォルダは `/ (root)`）を選んで Save。
 4. 数分後に `https://<ユーザー名>.github.io/<リポジトリ名>/` で開けるようになる。
 5. iPhone・iPad の Safari でその URL を開き、共有ボタン →「ホーム画面に追加」。次からはホーム画面のアイコンから起動する（電波がなくても起動できる）。
 
